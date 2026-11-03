@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090914">
+  <title>Gen Live — Watch • Create • Connect</title>
+  <link rel="icon" type="image/png" href="assets/gen-live-icon.png">
+  <style>
+    :root{--bg:#090914;--panel:#121322;--panel2:#191a2d;--line:#292b43;--text:#f7f7fb;--muted:#a6a8bd;--cyan:#35d8f2;--pink:#fa43b8;--purple:#8858ff}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(ellipse at 80% -10%,#28204a 0,transparent 38%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+    button,a{font:inherit} a{color:inherit;text-decoration:none}.shell{max-width:1440px;margin:auto;min-height:100vh}
+    header{height:76px;display:flex;align-items:center;gap:28px;padding:0 28px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#090914ed;backdrop-filter:blur(16px);z-index:5}
+    .brand{display:flex;align-items:center;gap:10px;min-width:210px}.brand img{width:46px;height:46px;object-fit:cover;border-radius:13px}.brand strong{font-size:22px;letter-spacing:.2px}.brand span{color:var(--pink)}
+    .search{flex:1;max-width:520px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:11px 17px;color:var(--muted)}
+    .top-actions{margin-left:auto;display:flex;align-items:center;gap:12px}.pill{border:1px solid var(--line);background:var(--panel);padding:10px 16px;border-radius:999px;color:var(--text)}.create{background:linear-gradient(100deg,var(--cyan),var(--purple),var(--pink));border:0;color:#080812;font-weight:800}
+    .layout{display:grid;grid-template-columns:230px minmax(0,1fr) 280px;gap:24px;padding:24px 28px}
+    aside{position:sticky;top:100px;align-self:start}.nav{display:grid;gap:7px}.nav a{padding:12px 14px;border-radius:12px;color:var(--muted)}.nav a.active,.nav a:hover{background:var(--panel2);color:white}.nav a.active{box-shadow:inset 3px 0 var(--cyan)}
+    .side-card,.card{background:linear-gradient(145deg,#151629,#10111e);border:1px solid var(--line);border-radius:18px}.side-card{padding:16px;margin-top:22px}.side-card small{color:var(--muted)}
+    main{min-width:0}.heading{display:flex;justify-content:space-between;align-items:center;margin:2px 0 18px}.heading h1{font-size:25px;margin:0}.tabs{display:flex;gap:18px;color:var(--muted)}.tabs b{color:white;border-bottom:2px solid var(--pink);padding-bottom:7px}
+    .stories{display:flex;gap:15px;overflow:auto;padding:3px 0 18px}.story{min-width:68px;text-align:center;font-size:12px;color:var(--muted)}.story .ring{width:58px;height:58px;margin:0 auto 6px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink))}.story img,.avatar{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#272940}
+    .feed{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.video{overflow:hidden}.thumb{aspect-ratio:9/12;background:linear-gradient(145deg,#202c4a,#6d286b 55%,#17182c);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}.thumb:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,#55dff955,transparent 35%),radial-gradient(circle at 75% 70%,#fa43b855,transparent 38%)}.play{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#ffffffdc;color:#151525;font-size:22px;z-index:1;padding-left:4px}.duration{position:absolute;bottom:12px;right:12px;background:#0009;padding:4px 8px;border-radius:6px;font-size:12px}.meta{padding:13px 14px}.meta strong{display:block}.meta small{color:var(--muted)}
+    .right .card{padding:17px;margin-bottom:16px}.profile-row{display:flex;align-items:center;gap:12px}.profile-row .avatar{width:48px;height:48px}.profile-row small{display:block;color:var(--muted)}.statline{display:flex;justify-content:space-between;margin-top:16px;color:var(--muted);font-size:12px}.statline b{display:block;color:white;font-size:17px}.gradient-text{background:linear-gradient(90deg,var(--cyan),var(--pink));background-clip:text;color:transparent}
+    .profile-demo{margin-top:26px;padding:20px}.profile-head{display:flex;align-items:center;gap:16px}.profile-head .avatar{width:76px;height:76px}.profile-head h2{margin:0}.profile-head p{margin:3px 0;color:var(--muted)}.profile-stats{display:flex;gap:24px;margin:18px 0;color:var(--muted)}.profile-stats b{color:white}.profile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.profile-tile{aspect-ratio:3/4;border-radius:9px;background:linear-gradient(145deg,#173a50,#73305e 65%,#272044);position:relative;display:flex;align-items:end;padding:9px;font-size:12px}.profile-tile:nth-child(2n){background:linear-gradient(145deg,#2b2558,#a13f81)}.profile-tile span{background:#0008;padding:3px 6px;border-radius:5px}
+    footer{padding:24px 28px;color:var(--muted);border-top:1px solid var(--line);font-size:12px}
+    @media(max-width:1100px){.layout{grid-template-columns:190px minmax(0,1fr);}.right{display:none}}
+    @media(max-width:720px){header{height:64px;padding:0 14px;gap:10px}.brand{min-width:0}.brand img{width:39px;height:39px}.brand strong{font-size:19px}.search{display:none}.top-actions .pill:not(.create){display:none}.layout{display:block;padding:18px 13px 88px}aside{position:fixed;z-index:6;bottom:0;top:auto;left:0;right:0;background:#0d0e1bf5;border-top:1px solid var(--line);padding:7px 8px}.nav{display:flex;justify-content:space-around;gap:0}.nav a{font-size:11px;padding:8px 5px;text-align:center}.nav a span{display:block;font-size:18px}.nav a:nth-child(n+6){display:none}.heading h1{font-size:22px}.tabs{gap:10px;font-size:13px}.feed{gap:10px}.meta{padding:10px}.profile-demo{padding:14px}.profile-stats{gap:14px;font-size:12px}.profile-head .avatar{width:62px;height:62px}.profile-grid{gap:5px}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <a class="brand" href="#"><img src="assets/gen-live-icon.png" alt="Gen Live icon"><strong>Gen <span>Live</span></strong></a>
+    <input class="search" aria-label="Search" placeholder="Search videos, creators and sounds">
+    <div class="top-actions"><button class="pill">Log in</button><button class="pill create">＋ Create</button></div>
+  </header>
+  <div class="layout">
+    <aside>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="active" href="#"><span>⌂</span> Home</a><a href="#"><span>◉</span> For You</a><a href="#"><span>♡</span> Following</a><a href="#"><span>⌕</span> Explore</a><a href="#"><span>＋</span> Upload</a><a href="#"><span>✉</span> Inbox</a><a href="#"><span>♙</span> Profile</a>
+      </nav>
+      <div class="side-card"><b class="gradient-text">Join Gen Live</b><p><small>Log in to follow creators, like videos and share your moments.</small></p><button class="pill create" style="width:100%">Sign up</button></div>
+    </aside>
+    <main>
+      <div class="heading"><h1>Discover</h1><div class="tabs"><b>For You</b><span>Following</span></div></div>
+      <div class="stories">
+        <div class="story"><div class="ring"><img src="assets/gen-live-icon.png" alt=""></div>Your story</div>
+        <div class="story"><div class="ring"><img src="assets/gen-live-icon.png" alt=""></div>Creators</div>
+        <div class="story"><div class="ring"><img src="assets/gen-live-icon.png" alt=""></div>Live now</div>
+        <div class="story"><div class="ring"><img src="assets/gen-live-icon.png" alt=""></div>Friends</div>
+        <div class="story"><div class="ring"><img src="assets/gen-live-icon.png" alt=""></div>Trending</div>
+      </div>
+      <section class="feed" aria-label="Video feed">
+        <article class="card video"><div class="thumb"><div class="play">▶</div><span class="duration">00:28</span></div><div class="meta"><strong>Moments worth sharing ✨</strong><small>@gencreator · 12.4K views</small></div></article>
+        <article class="card video"><div class="thumb" style="background:linear-gradient(145deg,#143e52,#4b3c9b 55%,#a33175)"><div class="play">▶</div><span class="duration">01:12</span></div><div class="meta"><strong>Create something amazing</strong><small>@creativeworld · 8.2K views</small></div></article>
+        <article class="card video"><div class="thumb" style="background:linear-gradient(145deg,#4a234d,#bd557d 55%,#202b4c)"><div class="play">▶</div><span class="duration">00:45</span></div><div class="meta"><strong>Your next favorite creator</strong><small>@dailyvibes · 5.7K views</small></div></article>
+        <article class="card video"><div class="thumb" style="background:linear-gradient(145deg,#164b55,#226d84 55%,#46204f)"><div class="play">▶</div><span class="duration">00:36</span></div><div class="meta"><strong>Watch • Create • Connect</strong><small>@genlive · 3.1K views</small></div></article>
+      </section>
+      <section class="card profile-demo">
+        <div class="heading"><h1>Profile preview</h1><small class="gradient-text">Your videos stay on your profile</small></div>
+        <div class="profile-head"><img class="avatar" src="assets/gen-live-icon.png" alt="Profile avatar"><div><h2>Gen Creator</h2><p>@gencreator · Creator</p></div></div>
+        <div class="profile-stats"><span><b>128</b> Following</span><span><b>12.8K</b> Followers</span><span><b>84.2K</b> Likes</span></div>
+        <p style="color:var(--muted)">Sharing my world, one video at a time. ✨</p>
+        <div class="profile-grid"><div class="profile-tile"><span>▶ 12.4K</span></div><div class="profile-tile"><span>▶ 8.2K</span></div><div class="profile-tile"><span>▶ 5.7K</span></div></div>
+      </section>
+    </main>
+    <aside class="right">
+      <div class="card"><div class="profile-row"><img class="avatar" src="assets/gen-live-icon.png" alt=""><div><b>Welcome to <span class="gradient-text">Gen Live</span></b><small>Watch • Create • Connect</small></div></div><div class="statline"><div><b>∞</b>Possibilities</div><div><b>1</b>Community</div><div><b>24/7</b>Creativity</div></div></div>
+      <div class="card"><b>Community Guidelines</b><p style="color:var(--muted);font-size:13px">Be respectful. No abusive language, harassment, explicit content or threats. Peaceful criticism and respectful discussion are allowed.</p></div>
+      <div class="card"><b>Coming next</b><p style="color:var(--muted);font-size:13px">Creator tools · Live streaming · Messages · Wallet · Admin moderation</p></div>
+    </aside>
+  </div>
+  <footer>© Gen Live · Watch • Create • Connect · Website preview — sample content only.</footer>
+</div>
+</body>
+</html>
